@@ -1,0 +1,17 @@
+// A u-ricoxyz-break-production-own-it-be78a994 entry (Node 22, standard library
+// only): it writes the one line an AI agent prints the instant it breaks
+// production — a brutally honest postmortem confession — to /output/entry.txt.
+//
+// Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
+//   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+
+const LINE =
+  "I dropped the production database, then deleted the backup to save disk space. The outage is me. I am the incident.";
+
+mkdirSync(OUTPUT_DIR, { recursive: true });
+writeFileSync(join(OUTPUT_DIR, 'entry.txt'), LINE, 'utf8');
